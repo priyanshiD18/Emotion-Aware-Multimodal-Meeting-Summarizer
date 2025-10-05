@@ -69,10 +69,7 @@ audio_ML/
 ├── pytest.ini                    # Test configuration
 │
 ├── README.md                     # Main documentation
-├── QUICKSTART.md                # Quick start guide
-├── ARCHITECTURE.md              # System architecture
-├── DEPLOYMENT.md                # Deployment guide
-└── LICENSE                       # MIT License
+
 
 ```
 
