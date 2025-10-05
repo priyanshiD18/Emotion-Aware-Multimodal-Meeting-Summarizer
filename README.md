@@ -12,20 +12,68 @@ A production-ready AI pipeline for meeting transcription, speaker diarization, e
 - **Real-Time Visualization**: Interactive emotion timelines and speaker analytics
 - **Production-Ready**: FastAPI backend, Streamlit frontend, Docker support
 
-## 🏗️ Architecture
+## 📁 Project Structure
+
 
 ```
 audio_ML/
-├── src/
-│   ├── audio/              # Audio processing & preprocessing
-│   ├── models/             # ASR, diarization, emotion detection
-│   ├── agents/             # Multi-agent LangChain orchestration
-│   ├── api/                # FastAPI backend
-│   └── frontend/           # Streamlit UI
-├── data/                   # Data storage
-├── tests/                  # Unit & integration tests
-├── docker/                 # Docker configurations
-└── configs/                # Configuration files
+├── src/                          # Source code
+│   ├── audio/                    # Audio processing
+│   │   ├── loader.py            # File I/O & validation
+│   │   └── preprocessing.py     # Noise reduction, normalization
+│   │
+│   ├── models/                   # ML models
+│   │   ├── transcription.py     # WhisperX integration
+│   │   ├── diarization.py       # Pyannote speaker diarization
+│   │   └── emotion.py           # SpeechBrain emotion detection
+│   │
+│   ├── agents/                   # Multi-agent system
+│   │   ├── base_agent.py        # Base agent class
+│   │   ├── action_agent.py      # Action extraction
+│   │   ├── sentiment_agent.py   # Sentiment analysis
+│   │   ├── context_agent.py     # Historical context
+│   │   └── orchestrator.py      # Agent coordination
+│   │
+│   ├── api/                      # FastAPI backend
+│   │   ├── main.py              # API endpoints
+│   │   ├── models.py            # Pydantic models
+│   │   ├── pipeline.py          # Processing pipeline
+│   │   └── tasks.py             # Task management
+│   │
+│   ├── frontend/                 # Streamlit UI
+│   │   └── app.py               # Web application
+│   │
+│   └── config.py                 # Configuration management
+│
+├── scripts/                      # Utility scripts
+│   ├── setup.py                 # Initial setup
+│   ├── download_models.py       # Model downloads
+│   └── test_pipeline.py         # Pipeline testing
+│
+├── tests/                        # Test suite
+│   ├── test_audio_processing.py # Audio tests
+│   └── test_api.py              # API tests
+│
+├── data/                         # Data storage
+│   ├── uploads/                 # Uploaded audio
+│   ├── outputs/                 # Processing results
+│   └── chroma_db/               # Vector database
+│
+├── models/cache/                 # Model cache
+├── logs/                         # Application logs
+│
+├── requirements.txt              # Python dependencies
+├── config.env.example           # Configuration template
+├── Dockerfile                    # Docker configuration
+├── docker-compose.yml           # Docker orchestration
+├── pytest.ini                    # Test configuration
+│
+├── README.md                     # Main documentation
+├── QUICKSTART.md                # Quick start guide
+├── ARCHITECTURE.md              # System architecture
+├── DEPLOYMENT.md                # Deployment guide
+└── LICENSE                       # MIT License
+
 ```
 
 ## 🚀 Quick Start
@@ -111,13 +159,6 @@ wandb login
 # View at: https://wandb.ai/your-entity/meeting-intelligence
 ```
 
-## 🎯 Performance Metrics
-
-- **WER (Word Error Rate)**: < 10% on clean audio
-- **DER (Diarization Error Rate)**: < 15%
-- **Emotion F1-Score**: > 0.75
-- **Processing Speed**: ~0.3x real-time on GPU
-
 ## 🔧 Configuration
 
 Key configurations in `.env`:
@@ -144,17 +185,6 @@ serverless deploy
 az containerapp up --name meeting-intelligence --source .
 ```
 
-## 🛠️ Development Phases
-
-- [x] Phase 1: Project Setup
-- [ ] Phase 2: Audio Processing & Transcription
-- [ ] Phase 3: Speaker Diarization & Emotion Detection
-- [ ] Phase 4: LLM Orchestration & Summarization
-- [ ] Phase 5: Backend API
-- [ ] Phase 6: Frontend & Visualization
-- [ ] Phase 7: Evaluation & Iteration
-- [ ] Phase 8: Deployment
-
 ## 📝 API Documentation
 
 Once running, visit http://localhost:8000/docs for interactive API documentation.
@@ -164,28 +194,9 @@ Once running, visit http://localhost:8000/docs for interactive API documentation
 - `POST /api/v1/upload`: Upload audio file
 - `POST /api/v1/transcribe`: Transcribe audio
 - `POST /api/v1/analyze`: Full analysis pipeline
-- `GET /api/v1/summary/{task_id}`: Retrieve results
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests
-5. Submit a pull request
-
-## 📄 License
-
-MIT License - See LICENSE file for details
-
-## 🙏 Acknowledgments
-
-- OpenAI Whisper team
-- Pyannote.audio developers
-- SpeechBrain community
-- LangChain maintainers
-
+- `GET /api/v1/summary/{task_id}`: Retrieve result
+  
 ---
 
-**Built with ❤️ for intelligent meeting analysis**
+
 
