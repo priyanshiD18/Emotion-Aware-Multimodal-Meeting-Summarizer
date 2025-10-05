@@ -194,5 +194,4 @@ WHISPER_MODEL=medium  # or small, base
 
 ---
 
-**Happy analyzing! 🎙️**
 
